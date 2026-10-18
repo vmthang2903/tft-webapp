@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import pool from "./db.js";
 
 dotenv.config();
 
@@ -10,6 +11,16 @@ app.use(express.json());
 
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
+});
+
+app.get("/api/db-test", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json({ connected: true, time: result.rows[0].now });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ connected: false, error: err.message });
+  }
 });
 
 const PORT = process.env.PORT || 3001;
