@@ -23,6 +23,18 @@ app.get("/api/db-test", async (req, res) => {
   }
 });
 
+app.get("/api/champions", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT id, api_name, name, cost, set_number FROM champions ORDER BY cost, name",
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch champions" });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

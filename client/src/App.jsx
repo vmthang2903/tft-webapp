@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
+import ChampionList from "./components/ChampionList";
 
 function App() {
-  const [status, setStatus] = useState("loading...");
-
-  useEffect(() => {
-    fetch("http://localhost:3001/api/health")
-      .then((res) => res.json())
-      .then((data) => setStatus(data.status))
-      .catch(() => setStatus("error"));
-  }, []);
-
-  return <h1>Server status: {status}</h1>;
+  return (
+    <div>
+      <h1>TFT WEB APP</h1>
+      <ChampionList />
+    </div>
+  );
 }
 
 export default App;

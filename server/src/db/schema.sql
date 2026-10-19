@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS champions (
+  id SERIAL PRIMARY KEY,
+  api_name VARCHAR(100) UNIQUE NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  cost INTEGER NOT NULL,
+  set_number INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS traits (
+  id SERIAL PRIMARY KEY,
+  api_name VARCHAR(100) UNIQUE NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  description TEXT,
+  set_number INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS champion_traits (
+  champion_id INTEGER REFERENCES champions(id) ON DELETE CASCADE,
+  trait_id INTEGER REFERENCES traits(id) ON DELETE CASCADE,
+  PRIMARY KEY (champion_id, trait_id)
+);
