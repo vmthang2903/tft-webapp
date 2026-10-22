@@ -1,5 +1,6 @@
 import pool from "../db.js";
 
+// get traits
 export const getTraits = async (req, res) => {
   try {
     const result = await pool.query(
