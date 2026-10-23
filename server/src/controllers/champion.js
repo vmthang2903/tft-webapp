@@ -1,5 +1,6 @@
 import pool from "../db.js";
 
+// get
 export const getChampions = async (req, res) => {
   try {
     const result = await pool.query(
